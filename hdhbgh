@@ -1,0 +1,28 @@
+   # 显示 & 朗读：好，棒，了不起，极好，令人难以置信  
+        if score_level < 5:  
+            return self.value_swapped  
+        if score_level < 8:  # 5 好  
+            Sounds.score_level(0)  
+            Element(Element.score_level[0], (350, 250)).draw(self.screen)  
+            pygame.display.flip()  
+            delay(500)  
+        elif score_level < 10:  # 8 棒  
+            Sounds.score_level(1)  
+            Element(Element.score_level[1], (350, 250)).draw(self.screen)  
+            pygame.display.flip()  
+            delay(500)  
+        elif score_level < 15:  # 10 了不起  
+            Sounds.score_level(2)  
+            Element(Element.score_level[2], (350, 250)).draw(self.screen)  
+            pygame.display.flip()  
+            delay(500)  
+        elif score_level < 20:  # 15 极好  
+            Sounds.score_level(3)  
+            Element(Element.score_level[3], (350, 250)).draw(self.screen)  
+            pygame.display.flip()  
+            delay(500)  
+        elif score_level >= 20:  # 20 令人难以置信  
+            Sounds.score_level(4)  
+            Element(Element.score_level[4], (350, 250)).draw(self.screen)  
+            pygame.display.flip()  
+            delay(500)  
