@@ -1,0 +1,84 @@
+package cvit.com.view;
+import cvit.com.manager.StudentManager;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JTextField;
+import java.awt.Rectangle;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
+public class Delete_studentPanel extends JPanel {
+    public Delete_studentPanel() {
+        try {
+            jbInit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+    private void jbInit() throws Exception {
+        this.setLayout(null);
+        this.setBackground(new Color(168, 233, 216));
+        tsno.setBounds(new Rectangle(78, 76, 130, 20));
+        jLabel1.setText("学号");
+        jLabel1.setBounds(new Rectangle(32, 81, 42, 15));
+        btn_delete.setBounds(new Rectangle(235, 76, 81, 23));
+        btn_delete.setText("删除");
+        btn_delete.addActionListener(new Delete_studentPanel_btn_delete_actionAdapter(this));
+        btn_exit.setBounds(new Rectangle(233, 111, 81, 23));
+        btn_exit.setText("退出");
+        btn_exit.addActionListener(new
+                Delete_studentPanel_btn_exit_actionAdapter(this));
+        this.add(tsno);
+        this.add(jLabel1);
+        this.add(btn_delete);
+        this.add(btn_exit);
+        this.setVisible(true);                   
+        this.setSize(600, 600);                  
+    }
+    JTextField tsno = new JTextField();
+    JLabel jLabel1 = new JLabel();
+    JButton btn_delete = new JButton();
+    JButton btn_exit = new JButton();
+    public void btn_delete_actionPerformed(ActionEvent e) {
+        String sno=tsno.getText();               
+        StudentManager sm=new StudentManager(); 
+        int ok = JOptionPane.showConfirmDialog(this, "是否删除" + tsno.getText() + "同学？ ", "提示信息",
+                JOptionPane.OK_CANCEL_OPTION);
+        if (ok == JOptionPane.OK_OPTION) {
+            int i=sm.deleteUser(sno);            
+            if (i > 0) {
+                JOptionPane.showMessageDialog(this, "删除成功！", "提示信息",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "你要删除的同学不存在！",
+                        "提示信息", JOptionPane.ERROR_MESSAGE);
+            }
+            tsno.setText("");
+        }
+    }
+ 
+    public void btn_exit_actionPerformed(ActionEvent e) {
+        this.setVisible(false);
+    }
+}
+class Delete_studentPanel_btn_exit_actionAdapter implements ActionListener {
+    private Delete_studentPanel adaptee;
+    Delete_studentPanel_btn_exit_actionAdapter(Delete_studentPanel adaptee) {
+        this.adaptee = adaptee;
+    }
+    public void actionPerformed(ActionEvent e) {
+        adaptee.btn_exit_actionPerformed(e);
+    }
+}
+class Delete_studentPanel_btn_delete_actionAdapter implements ActionListener {
+    private Delete_studentPanel adaptee;
+    Delete_studentPanel_btn_delete_actionAdapter(Delete_studentPanel adaptee) {
+        this.adaptee = adaptee;
+    }
+    public void actionPerformed(ActionEvent e) {
+        adaptee.btn_delete_actionPerformed(e);
+    }
+}
